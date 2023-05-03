@@ -9,7 +9,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Layout } from "../Layouts/Auth.layout";
+import { Layout } from "../../Layouts/Auth.layout";
 import React from "react";
 import { Login } from "@/Api";
 import { useRouter } from "next/router";
@@ -88,7 +88,7 @@ const Page = () => {
                             "user",
                             JSON.stringify(e.data.data)
                           );
-                          router.push("/admin");
+                          router.push("/");
                         } else {
                           setMessage(e.data.message);
                           setOpen(true);
