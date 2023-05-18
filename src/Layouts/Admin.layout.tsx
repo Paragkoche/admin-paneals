@@ -22,7 +22,7 @@ import {
 import SimpleBar from "simplebar-react";
 import Logo from "@/Components/Logo";
 import Link from "next/link";
-import { items } from "@/conf";
+import items from "@/conf";
 import { SideNavItem } from "@/Components/side-nav";
 import { usePathname, useRouter } from "next/navigation";
 import { AccountPopover } from "@/Components/AccountPopover";

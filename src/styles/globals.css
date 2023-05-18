@@ -1,6 +1,13 @@
 .red {
     fill:rgb(212, 87, 87) !important;
+    cursor: pointer;
 }
+#tooltip {
+    background: cornsilk;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+  }
 .st0 {
 fill: none;
 stroke: #c7cacf;

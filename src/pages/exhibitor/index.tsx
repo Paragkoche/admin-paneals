@@ -95,24 +95,14 @@ const Page = () => {
                   <Button
                     color="inherit"
                     onClick={async () => {
-                      const blob = new Blob(
-                        [
-                          await json2csv(exhibitor, {
-                            delimiter: {
-                              eol: "\n",
-                            },
-                          }),
-                        ],
-                        { type: "text/csv" }
-                      );
-
-                      const url = window.URL.createObjectURL(blob);
-
                       const a = document.createElement("a");
 
-                      a.setAttribute("href", url);
+                      a.setAttribute(
+                        "href",
+                        "https://api.boilerworldexpo.com/api/exhibitor/export"
+                      );
 
-                      a.setAttribute("download", "download.csv");
+                      a.setAttribute("download", "");
 
                       a.click();
                     }}

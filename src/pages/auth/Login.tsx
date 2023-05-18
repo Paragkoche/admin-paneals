@@ -47,7 +47,7 @@ const Page = () => {
             <Stack spacing={1} sx={{ mb: 3 }}>
               <Typography variant="h4">Login</Typography>
             </Stack>
-            <form noValidate>
+            <form>
               <Stack spacing={3}>
                 <TextField
                   fullWidth
@@ -77,6 +77,7 @@ const Page = () => {
                 type="button"
                 variant="contained"
                 onClick={() => {
+                  setLoading(true);
                   Login(fdata)
                     .then(
                       (e) => {

@@ -79,40 +79,6 @@ const Page = () => {
             <Stack direction="row" justifyContent="space-between" spacing={4}>
               <Stack spacing={1}>
                 <Typography variant="h4">Users</Typography>
-                <Stack alignItems="center" direction="row" spacing={1}>
-                  <Button
-                    color="inherit"
-                    onClick={async () => {
-                      const blob = new Blob(
-                        [
-                          await json2csv(exhibitor, {
-                            delimiter: {
-                              eol: "\n",
-                            },
-                          }),
-                        ],
-                        { type: "text/csv" }
-                      );
-
-                      const url = window.URL.createObjectURL(blob);
-
-                      const a = document.createElement("a");
-
-                      a.setAttribute("href", url);
-
-                      a.setAttribute("download", "download.csv");
-
-                      a.click();
-                    }}
-                    startIcon={
-                      <SvgIcon fontSize="small">
-                        <ArrowDownOnSquareIcon />
-                      </SvgIcon>
-                    }
-                  >
-                    Export
-                  </Button>
-                </Stack>
               </Stack>
               <div>
                 <Button

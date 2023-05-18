@@ -54,7 +54,7 @@ export const SideNavItem = (props: any) => {
               }),
             }}
           >
-            {icon}
+            {icon()}
           </Box>
         )}
         <Box
@@ -86,7 +86,7 @@ SideNavItem.propTypes = {
   active: PropTypes.bool,
   disabled: PropTypes.bool,
   external: PropTypes.bool,
-  icon: PropTypes.node,
+  icon: PropTypes.any,
   path: PropTypes.string,
   title: PropTypes.string.isRequired,
 };

@@ -2,11 +2,12 @@ import ChartBarIcon from "@heroicons/react/24/solid/ChartBarIcon";
 import UsersIcon from "@heroicons/react/24/solid/UsersIcon";
 import { SvgIcon } from "@mui/material";
 import StallIcon from "@heroicons/react/24/solid/HomeIcon";
-export const items = [
+import React from "react";
+export default [
   {
     title: "Dashboard",
     path: "/admin",
-    icon: (
+    icon: () => (
       <SvgIcon fontSize="small">
         <ChartBarIcon />
       </SvgIcon>
@@ -15,7 +16,7 @@ export const items = [
   {
     title: "Exhibitors",
     path: "/exhibitor",
-    icon: (
+    icon: () => (
       <SvgIcon fontSize="small">
         <UsersIcon />
       </SvgIcon>
@@ -24,7 +25,7 @@ export const items = [
   {
     title: "Visitors",
     path: "/visitor",
-    icon: (
+    icon: () => (
       <SvgIcon fontSize="small">
         <UsersIcon />
       </SvgIcon>
@@ -33,7 +34,7 @@ export const items = [
   {
     title: "Users",
     path: "/users",
-    icon: (
+    icon: () => (
       <SvgIcon fontSize="small">
         <UsersIcon />
       </SvgIcon>
@@ -42,7 +43,7 @@ export const items = [
   {
     title: "Oem",
     path: "/oem",
-    icon: (
+    icon: () => (
       <SvgIcon fontSize="small">
         <StallIcon />
       </SvgIcon>
