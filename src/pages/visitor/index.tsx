@@ -114,6 +114,10 @@ const Page = () => {
                     </SvgIcon>
                   }
                   variant="contained"
+                  onClick={() =>
+                    (window.location.href =
+                      "https://app.boilerworldexpo.com/exhibitor-register")
+                  }
                 >
                   Add
                 </Button>

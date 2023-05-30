@@ -1,5 +1,5 @@
 FROM node
-WORKDIR /fronend
+WORKDIR /app
 COPY . .
 RUN npm i -f
 # CMD ["ls","&&","npm","start"]

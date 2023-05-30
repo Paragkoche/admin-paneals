@@ -105,22 +105,6 @@ const TopNav = ({ navOpen }: { navOpen: any | Function }) => {
             )}
           </Stack>
           <Stack alignItems="center" direction="row" spacing={2}>
-            <Tooltip title="Contacts">
-              <IconButton>
-                <SvgIcon fontSize="small">
-                  <UsersIcon />
-                </SvgIcon>
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Notifications">
-              <IconButton>
-                <Badge badgeContent={4} color="success" variant="dot">
-                  <SvgIcon fontSize="small">
-                    <BellIcon />
-                  </SvgIcon>
-                </Badge>
-              </IconButton>
-            </Tooltip>
             <Avatar
               onClick={accountPopover.handleOpen}
               ref={accountPopover.anchorRef}
@@ -129,7 +113,7 @@ const TopNav = ({ navOpen }: { navOpen: any | Function }) => {
                 height: 24,
                 width: 24,
               }}
-              src="https://material-kit-pro-react.devias.io/assets/avatars/avatar-anika-visser.png"
+              // src="https://material-kit-pro-react.devias.io/assets/avatars/avatar-anika-visser.png"
             />
           </Stack>
         </Stack>

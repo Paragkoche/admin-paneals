@@ -1,8 +1,8 @@
-version: '3.8'
+version: "3.8"
 services:
-  frontend: 
+  frontend:
     container_name: nextjs
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     command: /bin/bash -c "npm run build && npm run start"
