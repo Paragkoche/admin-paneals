@@ -1,31 +1,44 @@
-import { getOEMUserProfile } from "@/Api";
-import Table_Cons from "@/Components/Tables/userprofile.table";
+import { CustomersTable } from "@/Components/Tables/Exhibitors-tabels";
 import { Layout } from "@/Layouts/Admin.layout";
 import ArrowDownOnSquareIcon from "@heroicons/react/24/solid/ArrowDownOnSquareIcon";
+import ArrowUpOnSquareIcon from "@heroicons/react/24/solid/ArrowUpOnSquareIcon";
+import MagnifyingGlassIcon from "@heroicons/react/24/solid/MagnifyingGlassIcon";
+import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
+import { json2csv } from "json-2-csv";
 import {
   Box,
   Button,
-  CircularProgress,
+  Card,
   Container,
+  InputAdornment,
+  OutlinedInput,
   Stack,
   SvgIcon,
   Typography,
 } from "@mui/material";
-import { Head } from "next/document";
+import Head from "next/head";
 import React from "react";
+import { Exhibitor } from "../../types";
+import { getAllExhibitor } from "@/Api";
 export function applyPagination(
-  documents: any[],
+  documents: any,
   page: number,
   rowsPerPage: number
 ) {
-  console.log("ss -- ", documents);
-
-  return documents?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  return documents.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 }
+
 const Page = () => {
+  const useCustomers = (exhibitor: Exhibitor[]) => {
+    return (page: number, rowsPerPage: number) => {
+      return React.useMemo(() => {
+        return applyPagination(exhibitor, page, rowsPerPage);
+      }, [page, rowsPerPage]);
+    };
+  };
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [exhibitor, setExhibitor] = React.useState<Array<any>>([]);
+  const [exhibitor, setExhibitor] = React.useState<Array<Exhibitor>>([]);
   const [data, setData] = React.useState(
     applyPagination(exhibitor, page, rowsPerPage)
   );
@@ -33,9 +46,10 @@ const Page = () => {
     return setData(applyPagination(exhibitor, page, rowsPerPage));
   }, [page, rowsPerPage, exhibitor]);
   const refresh = () => {
-    getOEMUserProfile(localStorage.getItem("token") || "").then(
+    getAllExhibitor(localStorage.getItem("token") || "").then(
       async (data) => {
-        setExhibitor(data.data.data.rows);
+        let d = await data.json();
+        setExhibitor(d.data.rows);
       },
       (e) => {
         console.log(e);
@@ -43,20 +57,15 @@ const Page = () => {
     );
   };
   React.useEffect(() => {
-    getOEMUserProfile(localStorage.getItem("token") || "")
-      .then(
-        async (data) => {
-          console.log(data.data);
-
-          setExhibitor(data.data.data.rows);
-        },
-        (e) => {
-          console.log(e);
-        }
-      )
-      .finally(() => {
-        setLoading(false);
-      });
+    getAllExhibitor(localStorage.getItem("token") || "").then(
+      async (data) => {
+        let d = await data.json();
+        setExhibitor(d.data.rows);
+      },
+      (e) => {
+        console.log(e);
+      }
+    );
   }, []);
   const handlePageChange = React.useCallback((event: any, value: any) => {
     setPage(value);
@@ -65,11 +74,11 @@ const Page = () => {
   const handleRowsPerPageChange = React.useCallback((event: any) => {
     setRowsPerPage(event.target.value);
   }, []);
-  const [loading, setLoading] = React.useState(true);
-  //   console.log(exhibitor);
-
-  return !loading && data ? (
+  return (
     <>
+      <Head>
+        <title>Stall</title>
+      </Head>
       <Box
         component="main"
         sx={{
@@ -81,7 +90,7 @@ const Page = () => {
           <Stack spacing={3}>
             <Stack direction="row" justifyContent="space-between" spacing={4}>
               <Stack spacing={1}>
-                <Typography variant="h4">USER PROFILE</Typography>
+                <Typography variant="h4">Stall</Typography>
                 <Stack alignItems="center" direction="row" spacing={1}>
                   <Button
                     color="inherit"
@@ -90,7 +99,7 @@ const Page = () => {
 
                       a.setAttribute(
                         "href",
-                        "https://api.boilerworldexpo.com/api/api/oem/exportFurniture"
+                        "https://api.boilerworldexpo.com/api/exhibitor/export"
                       );
 
                       a.setAttribute("download", "");
@@ -110,19 +119,18 @@ const Page = () => {
             </Stack>
           </Stack>
 
-          <Table_Cons
+          <CustomersTable
             count={exhibitor.length}
             items={data}
             onPageChange={handlePageChange}
             onRowsPerPageChange={handleRowsPerPageChange}
             page={page}
             rowsPerPage={rowsPerPage}
+            refresh={refresh}
           />
         </Container>
       </Box>
     </>
-  ) : (
-    <CircularProgress></CircularProgress>
   );
 };
 Page.getLayout = (page: any) => <Layout>{page}</Layout>;

@@ -128,3 +128,66 @@ export const getAllAdmin = async (token: string) => {
     },
   });
 };
+
+export const getOEMUserProfile = async (token: string) => {
+  return axios(URL + "/api/oem/exhibitorUserProfile?limit=500000000000000", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization",
+    },
+  });
+};
+export const getOEMVisa = async (token: string) => {
+  return axios(URL + "/api/oem/exhibitorVisa?limit=500000000000000", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization",
+    },
+  });
+};
+export const getOEMFascia = async (token: string) => {
+  return axios(URL + "/api/oem/exhibitorFascia?limit=500000000000000", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization",
+    },
+  });
+};
+export const getOEMPowerReq = async (token: string) => {
+  return axios(URL + "/api/oem/exhibitorPowerRequirement?limit=500000000000000", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization",
+    },
+  });
+};
+export const createEx = async (token: string, data: any) => {
+  return axios(URL + "/api/admin/createExhibitor", {
+    method: "POST",
+    data,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization",
+    },
+  });
+}
+export const createVisitor = async (token: string, data: any) => {
+  return axios(URL + "/api/admin/createVisitor", {
+    method: "POST",
+    data,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization",
+    },
+  });
+}

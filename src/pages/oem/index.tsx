@@ -24,9 +24,14 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import SimpleBar from "simplebar-react";
+import { useRouter } from "next/navigation";
 const SS = ({ name, icon, url }: any) => {
+  const router = useRouter();
   return (
-    <Card sx={{ height: "100%", cursor: "pointer" }}>
+    <Card
+      onClick={() => router.push(url)}
+      sx={{ height: "100%", cursor: "pointer" }}
+    >
       <CardContent>
         <Stack
           alignItems="flex-start"
@@ -89,32 +94,54 @@ const Page = () => {
 
           <Grid container spacing={7}>
             <Grid xs={12} sm={6} lg={3} m={4}>
-              <SS name={"User Profile"} icon={<UsersIcon />} />
-            </Grid>
-            <Grid xs={12} sm={6} lg={3} m={4}>
-              <SS name={"Visa"} icon={<UsersIcon />} />
-            </Grid>
-            <Grid xs={12} sm={6} lg={3} m={4}>
-              <SS name={"Fascia"} icon={<UsersIcon />} />
-            </Grid>
-            <Grid xs={12} sm={6} lg={3} m={4}>
-              <SS name={"Furniture"} icon={<UsersIcon />} />
-            </Grid>
-            <Grid xs={12} sm={6} lg={3} m={4}>
-              <SS name={"Host And Hostess"} icon={<UsersIcon />} />
-            </Grid>
-            <Grid xs={12} sm={6} lg={3} m={4}>
-              <SS name={"Contractor"} icon={<UsersIcon />} />
-            </Grid>
-            <Grid xs={12} sm={6} lg={3} m={4}>
-              <SS name={"Badges"} icon={<UsersIcon />} />
-            </Grid>
-            <Grid xs={12} sm={6} lg={3} m={4}>
-              <SS name={"Catalogue"} icon={<UsersIcon />} />
+              <SS
+                url="/oem/userprofile"
+                name={"User Profile"}
+                icon={<UsersIcon />}
+              />
             </Grid>
 
             <Grid xs={12} sm={6} lg={3} m={4}>
-              <SS name={"Power Requirement"} icon={<UsersIcon />} />
+              <SS url="/oem/fascia" name={"Fascia"} icon={<UsersIcon />} />
+            </Grid>
+            <Grid xs={12} sm={6} lg={3} m={4}>
+              <SS
+                url="/oem/furniture"
+                name={"Furniture"}
+                icon={<UsersIcon />}
+              />
+            </Grid>
+            <Grid xs={12} sm={6} lg={3} m={4}>
+              <SS
+                url="/oem/hostandhostess"
+                name={"Host And Hostess"}
+                icon={<UsersIcon />}
+              />
+            </Grid>
+            <Grid xs={12} sm={6} lg={3} m={4}>
+              <SS
+                url="/oem/contractor"
+                name={"Contractor"}
+                icon={<UsersIcon />}
+              />
+            </Grid>
+            <Grid xs={12} sm={6} lg={3} m={4}>
+              <SS url="/oem/badges" name={"Badges"} icon={<UsersIcon />} />
+            </Grid>
+            <Grid xs={12} sm={6} lg={3} m={4}>
+              <SS
+                url="/oem/catalogue"
+                name={"Catalogue"}
+                icon={<UsersIcon />}
+              />
+            </Grid>
+
+            <Grid xs={12} sm={6} lg={3} m={4}>
+              <SS
+                url="/oem/powerrequirement"
+                name={"Power Requirement"}
+                icon={<UsersIcon />}
+              />
             </Grid>
           </Grid>
         </Stack>

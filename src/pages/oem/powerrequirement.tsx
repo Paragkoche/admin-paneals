@@ -1,4 +1,4 @@
-import { getOEMUserProfile } from "@/Api";
+import { getOEMPowerReq } from "@/Api";
 import Table_Cons from "@/Components/Tables/userprofile.table";
 import { Layout } from "@/Layouts/Admin.layout";
 import ArrowDownOnSquareIcon from "@heroicons/react/24/solid/ArrowDownOnSquareIcon";
@@ -33,7 +33,7 @@ const Page = () => {
     return setData(applyPagination(exhibitor, page, rowsPerPage));
   }, [page, rowsPerPage, exhibitor]);
   const refresh = () => {
-    getOEMUserProfile(localStorage.getItem("token") || "").then(
+    getOEMPowerReq(localStorage.getItem("token") || "").then(
       async (data) => {
         setExhibitor(data.data.data.rows);
       },
@@ -43,7 +43,7 @@ const Page = () => {
     );
   };
   React.useEffect(() => {
-    getOEMUserProfile(localStorage.getItem("token") || "")
+    getOEMPowerReq(localStorage.getItem("token") || "")
       .then(
         async (data) => {
           console.log(data.data);
@@ -90,7 +90,7 @@ const Page = () => {
 
                       a.setAttribute(
                         "href",
-                        "https://api.boilerworldexpo.com/api/api/oem/exportFurniture"
+                        "https://api.boilerworldexpo.com/api/api/oem/exportPowerRequirement"
                       );
 
                       a.setAttribute("download", "");
