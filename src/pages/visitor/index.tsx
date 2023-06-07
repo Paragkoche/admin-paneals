@@ -19,7 +19,8 @@ import Head from "next/head";
 import React from "react";
 import { Exhibitor } from "../../types";
 import { getAllExhibitor, getAllVisitor } from "@/Api";
-import { json2csv } from "json-2-csv";
+
+import { useRouter } from "next/router";
 export function applyPagination(
   documents: any,
   page: number,
@@ -64,6 +65,7 @@ const Page = () => {
   const handleRowsPerPageChange = React.useCallback((event: any) => {
     setRowsPerPage(event.target.value);
   }, []);
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -114,10 +116,9 @@ const Page = () => {
                     </SvgIcon>
                   }
                   variant="contained"
-                  onClick={() =>
-                    (window.location.href =
-                      "https://app.boilerworldexpo.com/exhibitor-register")
-                  }
+                  onClick={() => {
+                    router.push("/visitor/add");
+                  }}
                 >
                   Add
                 </Button>
