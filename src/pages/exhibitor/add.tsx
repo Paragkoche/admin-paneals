@@ -1,19 +1,231 @@
-import { Layout } from "@/Layouts/Auth.layout";
-import MuiPhoneNumber from "material-ui-phone-number";
+import { Layout } from "@/Layouts/Admin.layout";
 import {
   Box,
   Button,
+  FormControl,
+  FormControlLabel,
+  InputLabel,
   MenuItem,
   Select,
   Snackbar,
-  Stack,
   TextField,
+  Stack,
   Typography,
+  SvgIcon,
+  Container,
 } from "@mui/material";
-import Head from "next/head";
-import React, { useState } from "react";
+import MuiPhoneNumber from "material-ui-phone-number";
+import React from "react";
 import { MultiSelect } from "react-mui-multi-select";
 import { createEx } from "@/Api";
+import { useRouter } from "next/router";
+var country_list = [
+  "Afghanistan",
+  "Albania",
+  "Algeria",
+  "Andorra",
+  "Angola",
+  "Anguilla",
+  "Antigua &amp; Barbuda",
+  "Argentina",
+  "Armenia",
+  "Aruba",
+  "Australia",
+  "Austria",
+  "Azerbaijan",
+  "Bahamas",
+  "Bahrain",
+  "Bangladesh",
+  "Barbados",
+  "Belarus",
+  "Belgium",
+  "Belize",
+  "Benin",
+  "Bermuda",
+  "Bhutan",
+  "Bolivia",
+  "Bosnia &amp; Herzegovina",
+  "Botswana",
+  "Brazil",
+  "British Virgin Islands",
+  "Brunei",
+  "Bulgaria",
+  "Burkina Faso",
+  "Burundi",
+  "Cambodia",
+  "Cameroon",
+  "Cape Verde",
+  "Cayman Islands",
+  "Chad",
+  "Chile",
+  "China",
+  "Colombia",
+  "Congo",
+  "Cook Islands",
+  "Costa Rica",
+  "Cote D Ivoire",
+  "Croatia",
+  "Cruise Ship",
+  "Cuba",
+  "Cyprus",
+  "Czech Republic",
+  "Denmark",
+  "Djibouti",
+  "Dominica",
+  "Dominican Republic",
+  "Ecuador",
+  "Egypt",
+  "El Salvador",
+  "Equatorial Guinea",
+  "Estonia",
+  "Ethiopia",
+  "Falkland Islands",
+  "Faroe Islands",
+  "Fiji",
+  "Finland",
+  "France",
+  "French Polynesia",
+  "French West Indies",
+  "Gabon",
+  "Gambia",
+  "Georgia",
+  "Germany",
+  "Ghana",
+  "Gibraltar",
+  "Greece",
+  "Greenland",
+  "Grenada",
+  "Guam",
+  "Guatemala",
+  "Guernsey",
+  "Guinea",
+  "Guinea Bissau",
+  "Guyana",
+  "Haiti",
+  "Honduras",
+  "Hong Kong",
+  "Hungary",
+  "Iceland",
+  "India",
+  "Indonesia",
+  "Iran",
+  "Iraq",
+  "Ireland",
+  "Isle of Man",
+  "Israel",
+  "Italy",
+  "Jamaica",
+  "Japan",
+  "Jersey",
+  "Jordan",
+  "Kazakhstan",
+  "Kenya",
+  "Kuwait",
+  "Kyrgyz Republic",
+  "Laos",
+  "Latvia",
+  "Lebanon",
+  "Lesotho",
+  "Liberia",
+  "Libya",
+  "Liechtenstein",
+  "Lithuania",
+  "Luxembourg",
+  "Macau",
+  "Macedonia",
+  "Madagascar",
+  "Malawi",
+  "Malaysia",
+  "Maldives",
+  "Mali",
+  "Malta",
+  "Mauritania",
+  "Mauritius",
+  "Mexico",
+  "Moldova",
+  "Monaco",
+  "Mongolia",
+  "Montenegro",
+  "Montserrat",
+  "Morocco",
+  "Mozambique",
+  "Namibia",
+  "Nepal",
+  "Netherlands",
+  "Netherlands Antilles",
+  "New Caledonia",
+  "New Zealand",
+  "Nicaragua",
+  "Niger",
+  "Nigeria",
+  "Norway",
+  "Oman",
+  "Pakistan",
+  "Palestine",
+  "Panama",
+  "Papua New Guinea",
+  "Paraguay",
+  "Peru",
+  "Philippines",
+  "Poland",
+  "Portugal",
+  "Puerto Rico",
+  "Qatar",
+  "Reunion",
+  "Romania",
+  "Russia",
+  "Rwanda",
+  "Saint Pierre &amp; Miquelon",
+  "Samoa",
+  "San Marino",
+  "Satellite",
+  "Saudi Arabia",
+  "Senegal",
+  "Serbia",
+  "Seychelles",
+  "Sierra Leone",
+  "Singapore",
+  "Slovakia",
+  "Slovenia",
+  "South Africa",
+  "South Korea",
+  "Spain",
+  "Sri Lanka",
+  "St Kitts &amp; Nevis",
+  "St Lucia",
+  "St Vincent",
+  "St. Lucia",
+  "Sudan",
+  "Suriname",
+  "Swaziland",
+  "Sweden",
+  "Switzerland",
+  "Syria",
+  "Taiwan",
+  "Tajikistan",
+  "Tanzania",
+  "Thailand",
+  "Timor L'Este",
+  "Togo",
+  "Tonga",
+  "Trinidad &amp; Tobago",
+  "Tunisia",
+  "Turkey",
+  "Turkmenistan",
+  "Turks &amp; Caicos",
+  "Uganda",
+  "Ukraine",
+  "United Arab Emirates",
+  "United Kingdom",
+  "Uruguay",
+  "Uzbekistan",
+  "Venezuela",
+  "Vietnam",
+  "Virgin Islands (US)",
+  "Yemen",
+  "Zambia",
+  "Zimbabwe",
+];
 const Page = () => {
   const [fdata, setFdata] = React.useState<{
     company_website: string;
@@ -52,256 +264,35 @@ const Page = () => {
     exhibitor_whatsapp_no_check: "",
     category_other_field: "",
   });
-  var country_list = [
-    "Afghanistan",
-    "Albania",
-    "Algeria",
-    "Andorra",
-    "Angola",
-    "Anguilla",
-    "Antigua &amp; Barbuda",
-    "Argentina",
-    "Armenia",
-    "Aruba",
-    "Australia",
-    "Austria",
-    "Azerbaijan",
-    "Bahamas",
-    "Bahrain",
-    "Bangladesh",
-    "Barbados",
-    "Belarus",
-    "Belgium",
-    "Belize",
-    "Benin",
-    "Bermuda",
-    "Bhutan",
-    "Bolivia",
-    "Bosnia &amp; Herzegovina",
-    "Botswana",
-    "Brazil",
-    "British Virgin Islands",
-    "Brunei",
-    "Bulgaria",
-    "Burkina Faso",
-    "Burundi",
-    "Cambodia",
-    "Cameroon",
-    "Cape Verde",
-    "Cayman Islands",
-    "Chad",
-    "Chile",
-    "China",
-    "Colombia",
-    "Congo",
-    "Cook Islands",
-    "Costa Rica",
-    "Cote D Ivoire",
-    "Croatia",
-    "Cruise Ship",
-    "Cuba",
-    "Cyprus",
-    "Czech Republic",
-    "Denmark",
-    "Djibouti",
-    "Dominica",
-    "Dominican Republic",
-    "Ecuador",
-    "Egypt",
-    "El Salvador",
-    "Equatorial Guinea",
-    "Estonia",
-    "Ethiopia",
-    "Falkland Islands",
-    "Faroe Islands",
-    "Fiji",
-    "Finland",
-    "France",
-    "French Polynesia",
-    "French West Indies",
-    "Gabon",
-    "Gambia",
-    "Georgia",
-    "Germany",
-    "Ghana",
-    "Gibraltar",
-    "Greece",
-    "Greenland",
-    "Grenada",
-    "Guam",
-    "Guatemala",
-    "Guernsey",
-    "Guinea",
-    "Guinea Bissau",
-    "Guyana",
-    "Haiti",
-    "Honduras",
-    "Hong Kong",
-    "Hungary",
-    "Iceland",
-    "India",
-    "Indonesia",
-    "Iran",
-    "Iraq",
-    "Ireland",
-    "Isle of Man",
-    "Israel",
-    "Italy",
-    "Jamaica",
-    "Japan",
-    "Jersey",
-    "Jordan",
-    "Kazakhstan",
-    "Kenya",
-    "Kuwait",
-    "Kyrgyz Republic",
-    "Laos",
-    "Latvia",
-    "Lebanon",
-    "Lesotho",
-    "Liberia",
-    "Libya",
-    "Liechtenstein",
-    "Lithuania",
-    "Luxembourg",
-    "Macau",
-    "Macedonia",
-    "Madagascar",
-    "Malawi",
-    "Malaysia",
-    "Maldives",
-    "Mali",
-    "Malta",
-    "Mauritania",
-    "Mauritius",
-    "Mexico",
-    "Moldova",
-    "Monaco",
-    "Mongolia",
-    "Montenegro",
-    "Montserrat",
-    "Morocco",
-    "Mozambique",
-    "Namibia",
-    "Nepal",
-    "Netherlands",
-    "Netherlands Antilles",
-    "New Caledonia",
-    "New Zealand",
-    "Nicaragua",
-    "Niger",
-    "Nigeria",
-    "Norway",
-    "Oman",
-    "Pakistan",
-    "Palestine",
-    "Panama",
-    "Papua New Guinea",
-    "Paraguay",
-    "Peru",
-    "Philippines",
-    "Poland",
-    "Portugal",
-    "Puerto Rico",
-    "Qatar",
-    "Reunion",
-    "Romania",
-    "Russia",
-    "Rwanda",
-    "Saint Pierre &amp; Miquelon",
-    "Samoa",
-    "San Marino",
-    "Satellite",
-    "Saudi Arabia",
-    "Senegal",
-    "Serbia",
-    "Seychelles",
-    "Sierra Leone",
-    "Singapore",
-    "Slovakia",
-    "Slovenia",
-    "South Africa",
-    "South Korea",
-    "Spain",
-    "Sri Lanka",
-    "St Kitts &amp; Nevis",
-    "St Lucia",
-    "St Vincent",
-    "St. Lucia",
-    "Sudan",
-    "Suriname",
-    "Swaziland",
-    "Sweden",
-    "Switzerland",
-    "Syria",
-    "Taiwan",
-    "Tajikistan",
-    "Tanzania",
-    "Thailand",
-    "Timor L'Este",
-    "Togo",
-    "Tonga",
-    "Trinidad &amp; Tobago",
-    "Tunisia",
-    "Turkey",
-    "Turkmenistan",
-    "Turks &amp; Caicos",
-    "Uganda",
-    "Ukraine",
-    "United Arab Emirates",
-    "United Kingdom",
-    "Uruguay",
-    "Uzbekistan",
-    "Venezuela",
-    "Vietnam",
-    "Virgin Islands (US)",
-    "Yemen",
-    "Zambia",
-    "Zimbabwe",
-  ];
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const router = useRouter();
   return (
     <>
-      <Head>
-        <title>Exhibitor Add | Boiler World Expo Admin</title>
-      </Head>
-      <Box
-        sx={{
-          flex: "1 1 auto",
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <Box
-          sx={{
-            maxWidth: 550,
-            px: 3,
-            py: "100px",
-            width: "100%",
-          }}
-        >
-          <div>
-            <Stack spacing={1} sx={{ mb: 3 }}>
-              <Typography variant="h4">Create Exhibitor</Typography>
+      <Box sx={{ py: 4 }}>
+        <Container maxWidth="xl">
+          <Stack spacing={3}>
+            <Stack direction="row" justifyContent="space-between" spacing={4}>
+              <Stack spacing={1}>
+                <Typography variant="h4">Exhibitor ADD</Typography>
+                <Stack alignItems="center" direction="row" spacing={1}></Stack>
+              </Stack>
+              <div>
+                <Button
+                  onClick={() => {
+                    router.push("/exhibitor/add");
+                  }}
+                  variant="contained"
+                >
+                  Back
+                </Button>
+              </div>
             </Stack>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setLoading(true);
-                createEx(localStorage.getItem("token") || "", fdata)
-                  .then(({ data }) => {
-                    if (data.status) {
-                    }
-                    setMessage(data.message);
-                    setOpen(true);
-                  })
-                  .finally(() => setLoading(false));
-              }}
-            >
-              <Stack spacing={3}>
+          </Stack>
+          <Box>
+            <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+              <FormControl sx={{ m: 3, width: 200 }}>
                 <TextField
                   value={fdata.email}
                   fullWidth
@@ -312,6 +303,8 @@ const Page = () => {
                   name="email"
                   type="email"
                 />
+              </FormControl>
+              <FormControl sx={{ m: 3, width: 200 }}>
                 <TextField
                   onChange={(v) =>
                     setFdata((s) => ({ ...s, company_repName: v.target.value }))
@@ -322,6 +315,8 @@ const Page = () => {
                   name="Name"
                   type="name"
                 />
+              </FormControl>
+              <FormControl sx={{ m: 3, width: 200 }}>
                 <TextField
                   onChange={(v) =>
                     setFdata((s) => ({ ...s, company_name: v.target.value }))
@@ -332,6 +327,8 @@ const Page = () => {
                   name="company"
                   type="text"
                 />
+              </FormControl>
+              <FormControl sx={{ m: 3, width: 200 }}>
                 <TextField
                   onChange={(v) =>
                     setFdata((s) => ({ ...s, company_website: v.target.value }))
@@ -342,6 +339,8 @@ const Page = () => {
                   name="website"
                   type="text"
                 />
+              </FormControl>
+              <FormControl sx={{ m: 3, width: 200 }}>
                 <TextField
                   onChange={(v) =>
                     setFdata((s) => ({ ...s, city: v.target.value }))
@@ -352,6 +351,8 @@ const Page = () => {
                   name="City"
                   type="text"
                 />
+              </FormControl>
+              <FormControl sx={{ m: 3, width: 200 }}>
                 <TextField
                   onChange={(v) =>
                     setFdata((s) => ({ ...s, state: v.target.value }))
@@ -362,6 +363,8 @@ const Page = () => {
                   name="State"
                   type="text"
                 />
+              </FormControl>
+              <FormControl sx={{ m: 3, width: 200 }}>
                 <MuiPhoneNumber
                   defaultCountry={"in"}
                   onChange={(v: any) => {
@@ -370,6 +373,8 @@ const Page = () => {
                     setFdata((s) => ({ ...s, mobile_no: v }));
                   }}
                 />
+              </FormControl>
+              <FormControl sx={{ m: 3, width: 200 }}>
                 <Select
                   label="country"
                   value={fdata.country}
@@ -381,6 +386,8 @@ const Page = () => {
                     <MenuItem value={v}>{v}</MenuItem>
                   ))}
                 </Select>
+              </FormControl>
+              <FormControl sx={{ m: 3, width: 200 }}>
                 <TextField
                   value={fdata.designation}
                   fullWidth
@@ -391,6 +398,8 @@ const Page = () => {
                   name="Designation"
                   type="text"
                 />
+              </FormControl>
+              <FormControl sx={{ m: 3, width: 200 }}>
                 <MultiSelect
                   getOptionKey={(v: any) => v}
                   getOptionLabel={(v: any) => v}
@@ -405,7 +414,10 @@ const Page = () => {
                   label="Category"
                   onChange={(_) => setFdata((s) => ({ ...s, pro_category: _ }))}
                 />
-                {fdata.pro_category.includes("other") && (
+              </FormControl>
+
+              {fdata.pro_category.includes("other") && (
+                <FormControl sx={{ m: 3, width: 200 }}>
                   <TextField
                     value={fdata.category_other_field}
                     fullWidth
@@ -419,7 +431,10 @@ const Page = () => {
                     name="other category"
                     type="text"
                   />
-                )}
+                </FormControl>
+              )}
+              <FormControl sx={{ m: 3, width: 400 }}>
+                <InputLabel>Is this your WhatsApp Number? *</InputLabel>
                 <Select
                   value={fdata.exhibitor_whatsapp_no_check}
                   onChange={(v) => {
@@ -430,23 +445,13 @@ const Page = () => {
                         v.target.value == "Yes" ? s.mobile_no : "",
                     }));
                     console.log(v.target.value, v.target.value == "Yes", fdata);
-
-                    // if (v.target.value == "Yes") {
-                    //   setFdata((s) => ({
-                    //     ...s,
-                    //     exhibitor_whatsapp_no_check: v.target.value,
-                    //     exhibitor_whatsapp_no: s.mobile_no,
-                    //   }));
-                    // } else
-                    //   setFdata((s) => ({
-                    //     ...s,
-                    //     exhibitor_whatsapp_no_check: v.target.value,
-                    //   }));
                   }}
                 >
                   <MenuItem value="Yes">Yes</MenuItem>
                   <MenuItem value="No">No</MenuItem>
                 </Select>
+              </FormControl>
+              <FormControl sx={{ m: 3, width: 200 }}>
                 <MuiPhoneNumber
                   value={fdata.exhibitor_whatsapp_no}
                   defaultCountry={"in"}
@@ -454,6 +459,8 @@ const Page = () => {
                     setFdata((s) => ({ ...s, exhibitor_whatsapp_no_check: v }));
                   }}
                 />
+              </FormControl>
+              <FormControl sx={{ m: 3, width: 200 }}>
                 <TextField
                   value={fdata.password}
                   fullWidth
@@ -463,6 +470,8 @@ const Page = () => {
                   label="Password"
                   type="password"
                 />
+              </FormControl>
+              <FormControl sx={{ m: 3, width: 200 }}>
                 <TextField
                   value={fdata.cpassword}
                   onChange={(v) =>
@@ -472,24 +481,35 @@ const Page = () => {
                   label="Conform Password"
                   type="password"
                 />
-              </Stack>
+              </FormControl>
               <Button
-                disabled={loading}
-                fullWidth
-                size="large"
-                sx={{ mt: 3 }}
-                type="submit"
-                variant="contained"
+                onClick={() => {
+                  setLoading(true);
+                  createEx(localStorage.getItem("token") || "", {
+                    ...fdata,
+                    pro_category: fdata.pro_category.toString(),
+                    blood_group: "A+",
+                    category_other_field:
+                      fdata.category_other_field === ""
+                        ? undefined
+                        : fdata.category_other_field,
+                  })
+                    .then(({ data }) => {
+                      if (!data.status) {
+                        setMessage(data.message);
+                        setOpen(true);
+                      }
+                    })
+                    .finally(() => setLoading(false));
+                }}
               >
-                Add Exhibitor
+                Submit
               </Button>
-              <Button type="button" fullWidth size="large" sx={{ mt: 3 }}>
-                Back
-              </Button>
-            </form>
-          </div>
-        </Box>
+            </Box>
+          </Box>
+        </Container>
       </Box>
+
       <Snackbar
         onClick={() => setOpen((s) => !s)}
         open={open}
@@ -499,5 +519,6 @@ const Page = () => {
     </>
   );
 };
+
 Page.getLayout = (page: any) => <Layout>{page}</Layout>;
 export default Page;
