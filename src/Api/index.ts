@@ -169,6 +169,16 @@ export const getOEMPowerReq = async (token: string) => {
     },
   });
 };
+export const getOEMexhibitorFurniture = async (token: string) => {
+  return axios(URL + "/api/oem/exhibitorFurniture?limit=500000000000000", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization",
+    },
+  });
+};
 export const createEx = async (token: string, data: any) => {
   return axios(URL + "/api/admin/createExhibitor", {
     method: "POST",

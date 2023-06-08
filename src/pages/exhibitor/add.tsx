@@ -478,7 +478,7 @@ const Page = () => {
                     setFdata((s) => ({ ...s, cpassword: v.target.value }))
                   }
                   fullWidth
-                  label="Conform Password"
+                  label="Confirm Password"
                   type="password"
                 />
               </FormControl>
@@ -497,6 +497,9 @@ const Page = () => {
                     .then(({ data }) => {
                       if (!data.status) {
                         setMessage(data.message);
+                        setOpen(true);
+                      } else {
+                        setMessage("Exhibitor Created successfully");
                         setOpen(true);
                       }
                     })

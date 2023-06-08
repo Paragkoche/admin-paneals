@@ -404,6 +404,9 @@ const Page = () => {
                       if (!data.status) {
                         setMessage(data.message);
                         setOpen(true);
+                      } else {
+                        setMessage("Visitor Created successfully");
+                        setOpen(true);
                       }
                     })
                     .finally(() => setLoading(false));

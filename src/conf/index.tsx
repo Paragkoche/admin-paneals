@@ -32,15 +32,6 @@ export default [
       </SvgIcon>
     ),
   },
-  {
-    title: "Users",
-    path: "/users",
-    icon: () => (
-      <SvgIcon fontSize="small">
-        <UsersIcon />
-      </SvgIcon>
-    ),
-  },
 
   {
     title: "Stall",
@@ -57,6 +48,15 @@ export default [
     icon: () => (
       <SvgIcon fontSize="small">
         <StallIcon />
+      </SvgIcon>
+    ),
+  },
+  {
+    title: "Users",
+    path: "/users",
+    icon: () => (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
       </SvgIcon>
     ),
   },
