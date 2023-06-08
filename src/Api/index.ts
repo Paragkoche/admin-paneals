@@ -179,6 +179,36 @@ export const getOEMexhibitorFurniture = async (token: string) => {
     },
   });
 };
+export const getOEMexhbitorBadges = async (token: string) => {
+  return axios(URL + "/api/oem/exhbitorBadges?limit=500000000000000", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization",
+    },
+  });
+};
+export const getOEMexhibitorHostAndHostess = async (token: string) => {
+  return axios(URL + "/api/oem/exhibitorHostAndHostess?limit=500000000000000", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization",
+    },
+  });
+};
+export const getOEMexportBoothContractor = async (token: string) => {
+  return axios(URL + "/api/oem/exhibitorContractor?limit=500000000000000", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization",
+    },
+  });
+};
 export const createEx = async (token: string, data: any) => {
   return axios(URL + "/api/admin/createExhibitor", {
     method: "POST",

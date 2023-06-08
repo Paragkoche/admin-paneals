@@ -128,13 +128,6 @@ const Page = () => {
             <Grid xs={12} sm={6} lg={3} m={4}>
               <SS url="/oem/badges" name={"Badges"} icon={<UsersIcon />} />
             </Grid>
-            <Grid xs={12} sm={6} lg={3} m={4}>
-              <SS
-                url="/oem/catalogue"
-                name={"Catalogue"}
-                icon={<UsersIcon />}
-              />
-            </Grid>
 
             <Grid xs={12} sm={6} lg={3} m={4}>
               <SS

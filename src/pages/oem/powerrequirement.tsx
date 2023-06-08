@@ -1,4 +1,9 @@
-import { getOEMPowerReq } from "@/Api";
+import {
+  getOEMPowerReq,
+  getOEMUserProfile,
+  getOEMexhibitorFurniture,
+} from "@/Api";
+import Tabls from "@/Components/Tables/Tabls";
 import Table_Cons from "@/Components/Tables/userprofile.table";
 import { Layout } from "@/Layouts/Admin.layout";
 import ArrowDownOnSquareIcon from "@heroicons/react/24/solid/ArrowDownOnSquareIcon";
@@ -9,10 +14,14 @@ import {
   Container,
   Stack,
   SvgIcon,
+  TableCell,
+  TableRow,
   Typography,
 } from "@mui/material";
 import { Head } from "next/document";
 import React from "react";
+import { useRouter } from "next/router";
+import Back from "@heroicons/react/24/solid/ArrowLeftIcon";
 export function applyPagination(
   documents: any[],
   page: number,
@@ -42,6 +51,7 @@ const Page = () => {
       }
     );
   };
+  const router = useRouter();
   React.useEffect(() => {
     getOEMPowerReq(localStorage.getItem("token") || "")
       .then(
@@ -81,7 +91,7 @@ const Page = () => {
           <Stack spacing={3}>
             <Stack direction="row" justifyContent="space-between" spacing={4}>
               <Stack spacing={1}>
-                <Typography variant="h4">USER PROFILE</Typography>
+                <Typography variant="h4">Power Requirement</Typography>
                 <Stack alignItems="center" direction="row" spacing={1}>
                   <Button
                     color="inherit"
@@ -107,16 +117,69 @@ const Page = () => {
                   </Button>
                 </Stack>
               </Stack>
+              <div>
+                <Button
+                  startIcon={
+                    <SvgIcon fontSize="small">
+                      <Back />
+                    </SvgIcon>
+                  }
+                  onClick={() => {
+                    router.push("/oem");
+                  }}
+                  variant="contained"
+                >
+                  Back
+                </Button>
+              </div>
             </Stack>
           </Stack>
 
-          <Table_Cons
+          <Tabls
             count={exhibitor.length}
             items={data}
             onPageChange={handlePageChange}
             onRowsPerPageChange={handleRowsPerPageChange}
             page={page}
             rowsPerPage={rowsPerPage}
+            child={() => {
+              let content = [];
+
+              let data = exhibitor;
+
+              for (var i = 0; i < data.length; i++) {
+                if (data[i].stall.length !== 0)
+                  content.push([
+                    data[i].company_name,
+                    data[i].stall[0].stall_type,
+                    data[i].stall[0].hall,
+                    data[i].stall[0].stall_no,
+                    data[i].contact_person || data[i].company_repName,
+                    data[i].catalogue_mobile_no || data[i].mobile_no,
+                    data[i].single_phase_connection || "",
+                    data[i].three_phase_connection || "",
+                  ]);
+              }
+              console.log(content);
+              return content.map((v) => (
+                <TableRow hover>
+                  {v.map((vv) => (
+                    <TableCell>{vv}</TableCell>
+                  ))}
+                </TableRow>
+              ));
+            }}
+            tableHeadTitles={[
+              "Company Name",
+              "Booth Type",
+              "Hall",
+              "Stall No",
+              "Contact Person",
+              "Contact Number",
+              "Single Phase",
+              "Three Phase",
+              "Special Requirement",
+            ]}
           />
         </Container>
       </Box>

@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import { Head } from "next/document";
 import React from "react";
+import { useRouter } from "next/router";
+import Back from "@heroicons/react/24/solid/ArrowLeftIcon";
 export function applyPagination(
   documents: any[],
   page: number,
@@ -42,6 +44,7 @@ const Page = () => {
       }
     );
   };
+  const router = useRouter();
   React.useEffect(() => {
     getOEMUserProfile(localStorage.getItem("token") || "")
       .then(
@@ -107,6 +110,21 @@ const Page = () => {
                   </Button>
                 </Stack>
               </Stack>
+              <div>
+                <Button
+                  startIcon={
+                    <SvgIcon fontSize="small">
+                      <Back />
+                    </SvgIcon>
+                  }
+                  onClick={() => {
+                    router.push("/oem");
+                  }}
+                  variant="contained"
+                >
+                  Back
+                </Button>
+              </div>
             </Stack>
           </Stack>
 
