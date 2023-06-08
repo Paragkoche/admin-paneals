@@ -281,7 +281,7 @@ const Page = () => {
               <div>
                 <Button
                   onClick={() => {
-                    router.push("/exhibitor/add");
+                    router.push("/exhibitor");
                   }}
                   variant="contained"
                 >
