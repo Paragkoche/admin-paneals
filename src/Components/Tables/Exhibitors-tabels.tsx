@@ -126,6 +126,7 @@ export const CustomersTable = (props: any) => {
                                       )
                                       .finally(() => {
                                         refresh();
+                                        setOpen(false);
                                       });
                                   },
                                   name: "Yes",
@@ -230,6 +231,7 @@ export const CustomersTable = (props: any) => {
                                     )
                                     .finally(() => {
                                       refresh();
+                                      setOpen(false);
                                     });
                                 },
                                 name: "Yes",
@@ -275,6 +277,7 @@ export const CustomersTable = (props: any) => {
                                     )
                                     .finally(() => {
                                       refresh();
+                                      setOpen(false);
                                     });
                                 },
                                 name: "Yes",

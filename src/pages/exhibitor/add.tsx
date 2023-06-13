@@ -501,6 +501,7 @@ const Page = () => {
                       } else {
                         setMessage("Exhibitor Created successfully");
                         setOpen(true);
+                        router.push("/exhibitor");
                       }
                     })
                     .finally(() => setLoading(false));
