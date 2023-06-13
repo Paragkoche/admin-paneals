@@ -104,13 +104,13 @@ const Page = () => {
             <Grid xs={12} sm={6} lg={3} m={4}>
               <SS url="/oem/fascia" name={"Fascia"} icon={<UsersIcon />} />
             </Grid>
-            <Grid xs={12} sm={6} lg={3} m={4}>
+            {/* <Grid xs={12} sm={6} lg={3} m={4}>
               <SS
                 url="/oem/furniture"
                 name={"Furniture"}
                 icon={<UsersIcon />}
               />
-            </Grid>
+            </Grid> */}
             <Grid xs={12} sm={6} lg={3} m={4}>
               <SS
                 url="/oem/hostandhostess"
@@ -122,6 +122,13 @@ const Page = () => {
               <SS
                 url="/oem/contractor"
                 name={"Contractor"}
+                icon={<UsersIcon />}
+              />
+            </Grid>
+            <Grid xs={12} sm={6} lg={3} m={4}>
+              <SS
+                url="/oem/catalogue"
+                name={"Catalogue"}
                 icon={<UsersIcon />}
               />
             </Grid>

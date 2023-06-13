@@ -1,4 +1,4 @@
-import { getOEMUserProfile, getOEMexhibitorFurniture } from "@/Api";
+import { getOEMexhibitorCatalogue } from "@/Api";
 import Tabls from "@/Components/Tables/Tabls";
 import Table_Cons from "@/Components/Tables/userprofile.table";
 import { Layout } from "@/Layouts/Admin.layout";
@@ -38,7 +38,7 @@ const Page = () => {
     return setData(applyPagination(exhibitor, page, rowsPerPage));
   }, [page, rowsPerPage, exhibitor]);
   const refresh = () => {
-    getOEMexhibitorFurniture(localStorage.getItem("token") || "").then(
+    getOEMexhibitorCatalogue(localStorage.getItem("token") || "").then(
       async (data) => {
         setExhibitor(data.data.data.rows);
       },
@@ -49,7 +49,7 @@ const Page = () => {
   };
   const router = useRouter();
   React.useEffect(() => {
-    getOEMexhibitorFurniture(localStorage.getItem("token") || "")
+    getOEMexhibitorCatalogue(localStorage.getItem("token") || "")
       .then(
         async (data) => {
           console.log(data.data);
@@ -87,7 +87,7 @@ const Page = () => {
           <Stack spacing={3}>
             <Stack direction="row" justifyContent="space-between" spacing={4}>
               <Stack spacing={1}>
-                <Typography variant="h4">Fascia</Typography>
+                <Typography variant="h4">Catalogue</Typography>
                 <Stack alignItems="center" direction="row" spacing={1}>
                   <Button
                     color="inherit"
@@ -96,7 +96,7 @@ const Page = () => {
 
                       a.setAttribute(
                         "href",
-                        "https://api.boilerworldexpo.com/api/api/oem/exportFurniture"
+                        "https://api.boilerworldexpo.com/api/api/oem/exportCatalogue"
                       );
 
                       a.setAttribute("download", "");
@@ -143,12 +143,29 @@ const Page = () => {
 
               let data = exhibitor;
               for (var i = 0; i < data.length; i++) {
-                content.push([
-                  data[i].company_name,
-                  data[i].stall[0].hall,
-                  data[i].stall[0].stall_no,
-                  // data[i].fascia.toUpperCase(),
-                ]);
+                if (data[i].stall.length !== 0)
+                  content.push([
+                    data[i]?.company_repName || "",
+                    data[i]?.stall[0]?.hall || "",
+                    data[i]?.stall[0]?.stall_no || "",
+                    data[i]?.company_name || "",
+                    data[i]?.first_name || "",
+                    data[i]?.last_name || "",
+                    data[i]?.mobile_no || "",
+                    data[i]?.email || "",
+                    data[i]?.gst || "",
+                    data[i]?.website || "",
+                    data[i]?.address_line1 || "",
+                    data[i]?.address_line2 || "",
+                    data[i]?.address_line3 || "",
+                    data[i]?.city || "",
+                    data[i]?.state || "",
+                    data[i]?.country || "",
+                    data[i]?.post_code || "",
+                    data[i]?.contact_person || "",
+                    data[i]?.company_profile || "",
+                    data[i]?.contact_person_designation || "",
+                  ]);
               }
               console.log(content);
               return content.map((v) => (
@@ -160,10 +177,25 @@ const Page = () => {
               ));
             }}
             tableHeadTitles={[
+              "Company Representative Name",
+              "Hall",
               "Company Name",
-              "Hall No",
-              "Stall No",
-              "Company Name for Stand Fascia",
+              "First Name",
+              "Last Name",
+              "Mobile Number",
+              "Email Address",
+              "GST",
+              "Website",
+              "Address Line 1",
+              "Address Line 2",
+              "Address Line 3",
+              "City",
+              "State",
+              "Country",
+              "Post Code",
+              "Contact Person",
+              "General Company / Product Description",
+              "Contact Person Designation",
             ]}
           />
         </Container>

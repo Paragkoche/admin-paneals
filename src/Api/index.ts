@@ -209,6 +209,16 @@ export const getOEMexhibitorHostAndHostess = async (token: string) => {
     },
   });
 };
+export const getOEMexhibitorCatalogue = async (token: string) => {
+  return axios(URL + "/api/oem/exhbitorCatalogue?limit=500000000000000", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization",
+    },
+  });
+};
 export const getOEMexportBoothContractor = async (token: string) => {
   return axios(URL + "/api/oem/exhibitorContractor?limit=500000000000000", {
     method: "GET",
