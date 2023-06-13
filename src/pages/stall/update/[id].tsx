@@ -402,7 +402,7 @@ const Page = () => {
                 setPop((s) => !s);
               })
               .finally(() => {
-                router.push("/exhibitors");
+                router.push("/exhibitor");
               });
           }}
         >
