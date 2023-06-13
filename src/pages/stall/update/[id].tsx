@@ -78,6 +78,8 @@ const Page = () => {
     open_sides: 0,
     exhibitor_id: "",
   });
+  console.log(value);
+
   React.useEffect(() => {
     if (id)
       getAllStall(localStorage.getItem("token") || "")
@@ -154,20 +156,23 @@ const Page = () => {
                       (v: any) => v.name[0] == ej.target.value[0] && !v.is_book
                     )
                   );
-                  console.log(allData);
 
                   getStallByEx(ex.email).then(async (data) => {
                     let d = await data.json();
+                    console.log(d);
 
                     d.data
-                      .filter((v: any) => v.exhibitor.id == id)
+                      .filter((v: any) => {
+                        if (v.exhibitor) return v.exhibitor.id == id;
+                      })
                       .map((xx: any) => {
+                        console.log(xx);
+
                         xx.stall_no.split(" ").map((e: any) => {
                           if (e !== "") setValue((s) => [...s, { name: e }]);
                         });
                       });
                   });
-                  console.log(value);
 
                   setFrom((s) => ({
                     ...s,
