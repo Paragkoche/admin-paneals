@@ -13,6 +13,7 @@ import {
   Typography,
   SvgIcon,
   Container,
+  CircularProgress,
 } from "@mui/material";
 import MuiPhoneNumber from "material-ui-phone-number";
 import React from "react";
@@ -407,12 +408,15 @@ const Page = () => {
                       } else {
                         setMessage("Visitor Created successfully");
                         setOpen(true);
+                        router.push("/visitor");
                       }
                     })
-                    .finally(() => setLoading(false));
+                    .finally(() => {
+                      setLoading(false);
+                    });
                 }}
               >
-                Submit
+                {loading ? <CircularProgress></CircularProgress> : "Submit"}
               </Button>
             </Box>
           </Box>
