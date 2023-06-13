@@ -18,12 +18,13 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import { OverviewTraffic } from "@/Components/Cards/Traffic";
-import { getAllExhibitor, getAllVisitor } from "@/Api";
+import { getAllExhibitor, getAllVisitor, getAllDelegates } from "@/Api";
 
 const Page = () => {
   const router = useRouter();
   const [loding, setLoading] = React.useState(true);
   const [visitors, setVisitors] = React.useState([]);
+  const [Delegates, setDelegates] = React.useState([]);
   const [exhibitor, setExhibitor] = React.useState([]);
   React.useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -43,17 +44,28 @@ const Page = () => {
           console.log(e);
         }
       );
-      getAllExhibitor(token)
+      getAllDelegates(token)
         .then(
           async (data) => {
+            console.log(data);
+
             let d = await data.json();
-            setExhibitor(d.data.rows);
+            setDelegates(d.data.rows);
           },
           (e) => {
             console.log(e);
           }
         )
         .finally(() => setLoading(false));
+      getAllExhibitor(token).then(
+        async (data) => {
+          let d = await data.json();
+          setExhibitor(d.data.rows);
+        },
+        (e) => {
+          console.log(e);
+        }
+      );
     }
   }, []);
   return (
@@ -108,7 +120,7 @@ const Page = () => {
                 <MainCard
                   name="Delegates"
                   icon={<UsersIcon />}
-                  count={exhibitor.length}
+                  count={Delegates.length}
                   color="info.main"
                   sx={{ height: "100%" }}
                 />
@@ -272,6 +284,83 @@ const Page = () => {
                         ).length,
                       ],
                     },
+                    {
+                      name: "Delegates",
+                      data: [
+                        Delegates.filter(
+                          (v: any) =>
+                            new Date(v.createdAt).getMonth() == 1 - 1 &&
+                            new Date(v.createdAt).getFullYear() ==
+                              new Date(Date.now()).getFullYear()
+                        ).length,
+                        Delegates.filter(
+                          (v: any) =>
+                            new Date(v.createdAt).getMonth() == 2 - 1 &&
+                            new Date(v.createdAt).getFullYear() ==
+                              new Date(Date.now()).getFullYear()
+                        ).length,
+                        Delegates.filter(
+                          (v: any) =>
+                            new Date(v.createdAt).getMonth() == 3 - 1 &&
+                            new Date(v.createdAt).getFullYear() ==
+                              new Date(Date.now()).getFullYear()
+                        ).length,
+                        Delegates.filter(
+                          (v: any) =>
+                            new Date(v.createdAt).getMonth() == 4 - 1 &&
+                            new Date(v.createdAt).getFullYear() ==
+                              new Date(Date.now()).getFullYear()
+                        ).length,
+                        Delegates.filter(
+                          (v: any) =>
+                            new Date(v.createdAt).getMonth() == 5 - 1 &&
+                            new Date(v.createdAt).getFullYear() ==
+                              new Date(Date.now()).getFullYear()
+                        ).length,
+                        Delegates.filter(
+                          (v: any) =>
+                            new Date(v.createdAt).getMonth() == 6 - 1 &&
+                            new Date(v.createdAt).getFullYear() ==
+                              new Date(Date.now()).getFullYear()
+                        ).length,
+                        Delegates.filter(
+                          (v: any) =>
+                            new Date(v.createdAt).getMonth() == 7 - 1 &&
+                            new Date(v.createdAt).getFullYear() ==
+                              new Date(Date.now()).getFullYear()
+                        ).length,
+                        Delegates.filter(
+                          (v: any) =>
+                            new Date(v.createdAt).getMonth() == 8 - 1 &&
+                            new Date(v.createdAt).getFullYear() ==
+                              new Date(Date.now()).getFullYear()
+                        ).length,
+                        Delegates.filter(
+                          (v: any) =>
+                            new Date(v.createdAt).getMonth() == 9 - 1 &&
+                            new Date(v.createdAt).getFullYear() ==
+                              new Date(Date.now()).getFullYear()
+                        ).length,
+                        Delegates.filter(
+                          (v: any) =>
+                            new Date(v.createdAt).getMonth() == 10 - 1 &&
+                            new Date(v.createdAt).getFullYear() ==
+                              new Date(Date.now()).getFullYear()
+                        ).length,
+                        Delegates.filter(
+                          (v: any) =>
+                            new Date(v.createdAt).getMonth() == 11 - 1 &&
+                            new Date(v.createdAt).getFullYear() ==
+                              new Date(Date.now()).getFullYear()
+                        ).length,
+                        Delegates.filter(
+                          (v: any) =>
+                            new Date(v.createdAt).getMonth() == 12 - 1 &&
+                            new Date(v.createdAt).getFullYear() ==
+                              new Date(Date.now()).getFullYear()
+                        ).length,
+                      ],
+                    },
                   ]}
                   sx={{ height: "100%" }}
                 />
@@ -282,7 +371,7 @@ const Page = () => {
                   chartSeries={[
                     exhibitor.length || 0,
                     visitors.length || 0,
-                    0,
+                    Delegates.length || 0,
                     0,
                   ]}
                   sx={{ height: "100%" }}

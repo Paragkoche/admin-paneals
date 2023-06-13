@@ -13,6 +13,16 @@ export const getAllVisitor = async (token: string) => {
     },
   });
 };
+export const getAllDelegates = async (token: string) => {
+  return fetch(URL + "/api/delegate?limit=50000", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization",
+    },
+  });
+};
 export const getAllExhibitor = async (token: string) => {
   return fetch(URL + "/exhibitor?limit=50000", {
     method: "GET",
