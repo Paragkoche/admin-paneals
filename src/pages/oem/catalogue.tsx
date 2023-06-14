@@ -145,9 +145,9 @@ const Page = () => {
               for (var i = 0; i < data.length; i++) {
                 if (data[i].stall.length !== 0)
                   content.push([
-                    data[i]?.company_repName || "",
+                    // data[i]?.company_repName || "",
                     data[i]?.stall[0]?.hall || "",
-                    data[i]?.stall[0]?.stall_no || "",
+                    // data[i]?.stall[0]?.stall_no || "",
                     data[i]?.company_name || "",
                     data[i]?.first_name || "",
                     data[i]?.last_name || "",
@@ -177,7 +177,7 @@ const Page = () => {
               ));
             }}
             tableHeadTitles={[
-              "Company Representative Name",
+              // "Company Representative Name",
               "Hall",
               "Company Name",
               "First Name",

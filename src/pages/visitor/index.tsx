@@ -69,7 +69,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Visitor</title>
+        <title>Visitors</title>
       </Head>
       <Box
         component="main"
@@ -82,7 +82,7 @@ const Page = () => {
           <Stack spacing={3}>
             <Stack direction="row" justifyContent="space-between" spacing={4}>
               <Stack spacing={1}>
-                <Typography variant="h4">Visitor</Typography>
+                <Typography variant="h4">Visitors</Typography>
                 <Stack alignItems="center" direction="row" spacing={1}>
                   <Button
                     color="inherit"

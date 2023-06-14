@@ -298,5 +298,10 @@ export function createComponents(config: { palette: any }) {
         variant: "filled",
       },
     },
+    MuiSelect: {
+      defaultProps: {
+        variant: "filled",
+      },
+    },
   };
 }

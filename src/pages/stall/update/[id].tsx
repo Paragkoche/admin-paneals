@@ -1,6 +1,12 @@
 import React from "react";
 import { _data } from "../../../conf/conf";
-
+import {
+  filledInputClasses,
+  inputLabelClasses,
+  outlinedInputClasses,
+  paperClasses,
+  tableCellClasses,
+} from "@mui/material";
 import { Layout } from "@/Layouts/Admin.layout";
 import { useRouter } from "next/router";
 import { getAllStall, getExhibitor, getStallByEx, UpdateStall } from "@/Api";
@@ -148,6 +154,11 @@ const Page = () => {
             <FormControl sx={{ m: 3, width: 200 }}>
               <InputLabel id="Hall-label">Hall</InputLabel>
               <Select
+                sx={
+                  {
+                    // border: "none",
+                  }
+                }
                 labelId="Hall-label"
                 onChange={(ej: any) => {
                   setValue([]);
@@ -255,7 +266,7 @@ const Page = () => {
             ></TextField>
             <TextField
               type="number"
-              label="Number of Extra Bags"
+              label="Number of Extra badges"
               value={from.extra_badges}
               onChange={(e) =>
                 setFrom((s) => ({
