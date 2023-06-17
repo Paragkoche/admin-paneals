@@ -83,7 +83,7 @@ const Page = () => {
           <Stack spacing={3}>
             <Stack direction="row" justifyContent="space-between" spacing={4}>
               <Stack spacing={1}>
-                <Typography variant="h4">Catalogue</Typography>
+                <Typography variant="h4">Delegates</Typography>
                 <Stack alignItems="center" direction="row" spacing={1}>
                   <Button
                     color="inherit"

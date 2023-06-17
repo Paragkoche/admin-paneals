@@ -367,12 +367,11 @@ const Page = () => {
               </Grid>
               <Grid xs={12} md={6} lg={4} sx={{ mt: 4 }}>
                 <OverviewTraffic
-                  labels={["Exhibitor", "Visitors", "Delegates", "Vendors"]}
+                  labels={["Exhibitor", "Visitors", "Delegates"]}
                   chartSeries={[
                     exhibitor.length || 0,
                     visitors.length || 0,
                     Delegates.length || 0,
-                    0,
                   ]}
                   sx={{ height: "100%" }}
                 />

@@ -26,6 +26,15 @@ export default [
     ),
   },
   {
+    title: "Delegates",
+    path: "/delegates",
+    icon: () => (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
+      </SvgIcon>
+    ),
+  },
+  {
     title: "Visitors",
     path: "/visitor",
     icon: () => (
@@ -68,15 +77,6 @@ export default [
     icon: () => (
       <SvgIcon fontSize="small">
         <UserGroup />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Delegates",
-    path: "/delegates",
-    icon: () => (
-      <SvgIcon fontSize="small">
-        <UsersIcon />
       </SvgIcon>
     ),
   },
