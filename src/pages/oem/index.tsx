@@ -177,7 +177,7 @@ const Page = () => {
                     <TableRow>
                       <TableCell>
                         <Typography variant="subtitle2">
-                          {data.company_repName}
+                          {data.company_name}
                         </Typography>
                       </TableCell>
 
