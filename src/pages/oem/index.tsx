@@ -97,12 +97,32 @@ const Page = () => {
               <SS
                 url="/oem/userprofile"
                 name={"User Profile"}
-                icon={<UsersIcon />}
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                }
               />
             </Grid>
 
             <Grid xs={12} sm={6} lg={3} m={4}>
-              <SS url="/oem/fascia" name={"Fascia"} icon={<UsersIcon />} />
+              <SS
+                url="/oem/fascia"
+                name={"Fascia"}
+                icon={
+                  <svg xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.895 3.553A1.001 1.001 0 0 0 17 3H7c-.379 0-.725.214-.895.553l-4 8a1 1 0 0 0 0 .895l4 8c.17.338.516.552.895.552h10c.379 0 .725-.214.895-.553l4-8a1 1 0 0 0 0-.895l-4-7.999zM19.382 11h-7.764l-3-6h7.764l3 6zm-3 8H8.618l3-6h7.764l-3 6z"></path>
+                  </svg>
+                }
+              />
             </Grid>
             {/* <Grid xs={12} sm={6} lg={3} m={4}>
               <SS
@@ -115,32 +135,85 @@ const Page = () => {
               <SS
                 url="/oem/hostandhostess"
                 name={"Host And Hostess"}
-                icon={<UsersIcon />}
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="#2c3e50"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                      d="M11 2l-.15 .005a2 2 0 0 0 -1.85 1.995v2.803l-2.428 -1.401a2 2 0 0 0 -2.732 .732l-1 1.732l-.073 .138a2 2 0 0 0 .805 2.594l2.427 1.402l-2.427 1.402a2 2 0 0 0 -.732 2.732l1 1.732l.083 .132a2 2 0 0 0 2.649 .6l2.428 -1.402v2.804a2 2 0 0 0 2 2h2l.15 -.005a2 2 0 0 0 1.85 -1.995v-2.804l2.428 1.403a2 2 0 0 0 2.732 -.732l1 -1.732l.073 -.138a2 2 0 0 0 -.805 -2.594l-2.428 -1.403l2.428 -1.402a2 2 0 0 0 .732 -2.732l-1 -1.732l-.083 -.132a2 2 0 0 0 -2.649 -.6l-2.428 1.4v-2.802a2 2 0 0 0 -2 -2h-2z"
+                      stroke-width="0"
+                      fill="currentColor"
+                    />
+                  </svg>
+                }
               />
             </Grid>
             <Grid xs={12} sm={6} lg={3} m={4}>
               <SS
                 url="/oem/contractor"
                 name={"Contractor"}
-                icon={<UsersIcon />}
+                icon={
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M21 6h-4V3a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1zM6 18H4v-2h2v2zm0-4H4v-2h2v2zm5 4H9v-2h2v2zm0-4H9v-2h2v2zm0-4H9V8h2v2zm0-4H9V4h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm5 12h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V8h2v2z"></path>
+                  </svg>
+                }
               />
             </Grid>
             <Grid xs={12} sm={6} lg={3} m={4}>
               <SS
                 url="/oem/catalogue"
                 name={"Catalogue"}
-                icon={<UsersIcon />}
+                icon={
+                  <svg xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 3H5c-1.103 0-2 .897-2 2v4h18V5c0-1.103-.897-2-2-2zM3 19c0 1.103.897 2 2 2h8V11H3v8zm12 2h4c1.103 0 2-.897 2-2v-8h-6v10z"></path>
+                  </svg>
+                }
               />
             </Grid>
             <Grid xs={12} sm={6} lg={3} m={4}>
-              <SS url="/oem/badges" name={"Badges"} icon={<UsersIcon />} />
+              <SS
+                url="/oem/badges"
+                name={"Badges"}
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                }
+              />
             </Grid>
 
             <Grid xs={12} sm={6} lg={3} m={4}>
               <SS
                 url="/oem/powerrequirement"
                 name={"Power Requirement"}
-                icon={<UsersIcon />}
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M14.615 1.595a.75.75 0 01.359.852L12.982 9.75h7.268a.75.75 0 01.548 1.262l-10.5 11.25a.75.75 0 01-1.272-.71l1.992-7.302H3.75a.75.75 0 01-.548-1.262l10.5-11.25a.75.75 0 01.913-.143z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                }
               />
             </Grid>
           </Grid>
