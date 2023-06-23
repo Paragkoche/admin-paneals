@@ -103,6 +103,19 @@ const Page = () => {
             onRowsPerPageChange={handleRowsPerPageChange}
             page={page}
             rowsPerPage={rowsPerPage}
+            fu={() =>
+              getAllAdmin(localStorage.getItem("token") || "").then(
+                (data) => {
+                  console.log(data);
+
+                  setExhibitor(data.data.data.rows);
+                  console.log(exhibitor);
+                },
+                (e) => {
+                  console.log(e);
+                }
+              )
+            }
           />
         </Container>
       </Box>

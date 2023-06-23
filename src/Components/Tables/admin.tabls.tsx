@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import {
   Avatar,
   Box,
+  Button,
   Card,
   Checkbox,
   Stack,
@@ -16,6 +17,7 @@ import {
 } from "@mui/material";
 import SimpleBar from "simplebar-react";
 import { styled } from "@mui/material/styles";
+import { deleteAdmin } from "@/Api";
 
 const Scrollbar = styled(SimpleBar)``;
 const getInitials = (name = "") =>
@@ -35,6 +37,7 @@ export const CustomersTable = (props: any) => {
     page = 0,
     rowsPerPage = 0,
     selected = [],
+    fu,
   } = props;
 
   return (
@@ -46,6 +49,7 @@ export const CustomersTable = (props: any) => {
               <TableRow>
                 <TableCell>Name</TableCell>
                 <TableCell>Email</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -66,6 +70,30 @@ export const CustomersTable = (props: any) => {
                       </Stack>
                     </TableCell>
                     <TableCell>{customer.email}</TableCell>
+                    <TableCell>
+                      <Button
+                        color="error"
+                        onClick={() => {
+                          deleteAdmin(
+                            localStorage.getItem("token") || "",
+                            customer.id
+                          )
+                            .then(
+                              async (data) => {
+                                const d = await data.json();
+                                alert(d.message);
+                              },
+                              async (error) => {
+                                const d = await error.json();
+                                alert(d.message);
+                              }
+                            )
+                            .finally(fu);
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 );
               })}
@@ -98,4 +126,5 @@ CustomersTable.propTypes = {
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
   selected: PropTypes.array,
+  fu: PropTypes.func,
 };

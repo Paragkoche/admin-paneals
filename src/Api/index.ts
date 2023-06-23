@@ -64,7 +64,16 @@ export const deleteExhibitor = async (token: string, id: string) => {
     },
   });
 };
-
+export const deleteAdmin = async (token: string, id: string) => {
+  return fetch(URL + "/api/admin/delete/" + id, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization",
+    },
+  });
+};
 export const ConformExhibitor = async (token: string, id: string) => {
   return fetch(URL + "/exhibitor/confirm/exhibitor/" + id, {
     method: "PUT",
