@@ -10,6 +10,7 @@ import {
   Container,
   Stack,
   SvgIcon,
+  Table,
   TableCell,
   TableRow,
   Typography,
@@ -20,6 +21,33 @@ import Woring from "@heroicons/react/24/solid/XMarkIcon";
 import { Head } from "next/document";
 import React from "react";
 import { useRouter } from "next/router";
+import { format } from "date-fns";
+import {
+  Avatar,
+  // Box,
+  Card,
+  Checkbox,
+  // Stack,
+  // Table,
+  TableBody,
+  // TableCell,
+  TableHead,
+  TablePagination,
+  // TableRow,
+  // Typography,
+} from "@mui/material";
+import SimpleBar from "simplebar-react";
+import { styled } from "@mui/material/styles";
+
+const Scrollbar = styled(SimpleBar)``;
+const getInitials = (name = "") =>
+  name
+    .replace(/\s+/, " ")
+    .split(" ")
+    .slice(0, 2)
+    .map((v) => v && v[0].toUpperCase())
+    .join("");
+
 import Back from "@heroicons/react/24/solid/ArrowLeftIcon";
 export function applyPagination(
   documents: any[],
@@ -30,6 +58,175 @@ export function applyPagination(
 
   return documents?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 }
+
+const Tables = (props: any) => {
+  const theme = useTheme();
+  const {
+    count = 0,
+    items = [],
+    onPageChange = () => {},
+    onRowsPerPageChange,
+    page = 0,
+    rowsPerPage = 0,
+    selected = [],
+  } = props;
+  console.log(items);
+
+  return (
+    <Card>
+      <Scrollbar>
+        <Box sx={{ minWidth: 800 }}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                {[
+                  "company_name",
+                  "name",
+                  "gender",
+                  "category",
+                  "institute",
+                  "branch",
+                  "mobile_no",
+                  "email",
+                  "district",
+                  "city",
+                  "state",
+                  "country",
+                  "hall",
+                  "day_1",
+                  "day_2",
+                  "day_3",
+                  "all_day",
+                ].map((v, i) => (
+                  <TableCell>{v}</TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {items.map((customer: any) => {
+                return (
+                  <TableRow hover key={customer.id}>
+                    <TableCell>
+                      <Stack alignItems="center" direction="row" spacing={2}>
+                        <Avatar
+                          src={customer.avatar}
+                          sx={{ bgcolor: "warning.main" }}
+                        >
+                          {getInitials(customer.company_name)}
+                        </Avatar>
+                        <Typography variant="subtitle2">
+                          {customer.company_name}
+                        </Typography>
+                      </Stack>
+                    </TableCell>
+                    <TableCell>{customer.name}</TableCell>
+                    <TableCell>{customer.gender}</TableCell>
+                    <TableCell>{customer.category}</TableCell>
+                    <TableCell>{customer.institute}</TableCell>
+                    <TableCell>{customer.branch}</TableCell>
+                    <TableCell>{customer.mobile_no}</TableCell>
+                    <TableCell>{customer.email}</TableCell>
+                    <TableCell>{customer.district}</TableCell>
+                    <TableCell>{customer.city}</TableCell>
+                    <TableCell>{customer.country}</TableCell>
+                    <TableCell>{customer.hall}</TableCell>
+                    <TableCell>{customer.email}</TableCell>
+                    <TableCell>
+                      <Box
+                        sx={{
+                          width: 24,
+                          height: 24,
+                          padding: "5px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          color: "white",
+                          borderRadius: "50%",
+                          bgcolor: customer.day_1
+                            ? theme.palette.success.main
+                            : theme.palette.error.main,
+                        }}
+                      >
+                        {customer.day_1 ? <Right /> : <Woring />}
+                      </Box>
+                    </TableCell>
+                    <TableCell>
+                      <Box
+                        sx={{
+                          width: 24,
+                          height: 24,
+                          padding: "5px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          color: "white",
+                          borderRadius: "50%",
+                          bgcolor: customer.day_2
+                            ? theme.palette.success.main
+                            : theme.palette.error.main,
+                        }}
+                      >
+                        {customer.day_2 ? <Right /> : <Woring />}
+                      </Box>
+                    </TableCell>
+                    <TableCell>
+                      <Box
+                        sx={{
+                          width: 24,
+                          height: 24,
+                          padding: "5px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          color: "white",
+                          borderRadius: "50%",
+                          bgcolor: customer.day_3
+                            ? theme.palette.success.main
+                            : theme.palette.error.main,
+                        }}
+                      >
+                        {customer.day_3 ? <Right /> : <Woring />}
+                      </Box>
+                    </TableCell>
+                    <TableCell>
+                      <Box
+                        sx={{
+                          width: 24,
+                          height: 24,
+                          padding: "5px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          color: "white",
+                          borderRadius: "50%",
+                          bgcolor: customer.day_all
+                            ? theme.palette.success.main
+                            : theme.palette.error.main,
+                        }}
+                      >
+                        {customer.day_all ? <Right /> : <Woring />}
+                      </Box>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Box>
+      </Scrollbar>
+      <TablePagination
+        component="div"
+        count={count}
+        onPageChange={onPageChange}
+        onRowsPerPageChange={onRowsPerPageChange}
+        page={page}
+        rowsPerPage={rowsPerPage}
+        rowsPerPageOptions={[5, 10, 25]}
+      />
+    </Card>
+  );
+};
+
 const Page = () => {
   const theme = useTheme();
   const [page, setPage] = React.useState(0);
@@ -126,89 +323,13 @@ const Page = () => {
               </div>
             </Stack>
           </Stack>
-
-          <Tabls
+          <Tables
             count={exhibitor.length}
             items={data}
             onPageChange={handlePageChange}
             onRowsPerPageChange={handleRowsPerPageChange}
             page={page}
             rowsPerPage={rowsPerPage}
-            child={() => {
-              let content = [];
-
-              let data = exhibitor;
-              for (var i = 0; i < data.length; i++) {
-                content.push([
-                  data[i]?.company_name || "",
-                  data[i]?.name || "",
-                  data[i]?.gender || "",
-                  data[i]?.category || "",
-                  data[i]?.institute || "",
-                  data[i]?.branch || "",
-                  data[i]?.mobile_no || "",
-                  data[i]?.email || "",
-                  data[i]?.district || "",
-                  data[i]?.city || "",
-                  data[i]?.state || "",
-                  data[i]?.country || "",
-                  data[i]?.hall || "",
-                  data[i]?.day_1 || "",
-                  data[i]?.day_2 || "",
-                  data[i]?.day_3 || "",
-                  data[i]?.all_day || "",
-                ]);
-              }
-              console.log(content);
-              return content.map((v) => (
-                <TableRow hover>
-                  {v.map((vv) =>
-                    typeof vv !== "boolean" ? (
-                      <TableCell>{vv}</TableCell>
-                    ) : (
-                      <TableCell>
-                        <Box
-                          sx={{
-                            width: 24,
-                            height: 24,
-                            padding: "5px",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            color: "white",
-                            borderRadius: "50%",
-                            bgcolor: v
-                              ? theme.palette.success.main
-                              : theme.palette.error.main,
-                          }}
-                        >
-                          {vv ? <Right /> : <Woring />}
-                        </Box>
-                      </TableCell>
-                    )
-                  )}
-                </TableRow>
-              ));
-            }}
-            tableHeadTitles={[
-              "company_name",
-              "name",
-              "gender",
-              "category",
-              "institute",
-              "branch",
-              "mobile_no",
-              "email",
-              "district",
-              "city",
-              "state",
-              "country",
-              "hall",
-              "day_1",
-              "day_2",
-              "day_3",
-              "all_day",
-            ]}
           />
         </Container>
       </Box>
