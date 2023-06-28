@@ -1,4 +1,8 @@
-import { getAllDelegates, getOEMexhibitorCatalogue } from "@/Api";
+import {
+  deleteDelegate,
+  getAllDelegates,
+  getOEMexhibitorCatalogue,
+} from "@/Api";
 import Tabls from "@/Components/Tables/Tabls";
 import Table_Cons from "@/Components/Tables/userprofile.table";
 import { Layout } from "@/Layouts/Admin.layout";
@@ -8,6 +12,11 @@ import {
   Button,
   CircularProgress,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Snackbar,
   Stack,
   SvgIcon,
   Table,
@@ -69,164 +78,258 @@ const Tables = (props: any) => {
     page = 0,
     rowsPerPage = 0,
     selected = [],
+    refresh,
   } = props;
   console.log(items);
-
+  const [openS, setOpenS] = React.useState(false);
+  const [message, setMessage] = React.useState<string>("");
+  const [open, setOpen] = React.useState(false);
+  const [Dprops, setDProps] = React.useState<{
+    data?: {
+      title: string;
+      message: string;
+    };
+    action_button?: Array<{ fun: () => any; name: string }>;
+  }>({});
   return (
-    <Card>
-      <Scrollbar>
-        <Box sx={{ minWidth: 800 }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                {[
-                  "company_name",
-                  "name",
-                  "gender",
-                  "category",
-                  "institute",
-                  "branch",
-                  "mobile_no",
-                  "email",
-                  "district",
-                  "city",
-                  "state",
-                  "country",
-                  "hall",
-                  "day_1",
-                  "day_2",
-                  "day_3",
-                  "all_day",
-                ].map((v, i) => (
-                  <TableCell>{v}</TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {items.map((customer: any) => {
-                return (
-                  <TableRow hover key={customer.id}>
-                    <TableCell>
-                      <Stack alignItems="center" direction="row" spacing={2}>
-                        <Avatar
-                          src={customer.avatar}
-                          sx={{ bgcolor: "warning.main" }}
+    <>
+      <Card>
+        <Scrollbar>
+          <Box sx={{ minWidth: 800 }}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {[
+                    "company_name",
+                    "name",
+                    "gender",
+                    "category",
+                    "institute",
+                    "branch",
+                    "mobile_no",
+                    "email",
+                    "district",
+                    "city",
+                    "state",
+                    "country",
+                    "hall",
+                    "day_1",
+                    "day_2",
+                    "day_3",
+                    "all_day",
+                    "Action Button",
+                  ].map((v, i) => (
+                    <TableCell>{v}</TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {items.map((customer: any) => {
+                  return (
+                    <TableRow hover key={customer.id}>
+                      <TableCell>
+                        <Stack alignItems="center" direction="row" spacing={2}>
+                          <Avatar
+                            src={customer.avatar}
+                            sx={{ bgcolor: "warning.main" }}
+                          >
+                            {getInitials(customer.company_name)}
+                          </Avatar>
+                          <Typography variant="subtitle2">
+                            {customer.company_name}
+                          </Typography>
+                        </Stack>
+                      </TableCell>
+                      <TableCell>{customer.name}</TableCell>
+                      <TableCell>{customer.gender}</TableCell>
+                      <TableCell>{customer.category}</TableCell>
+                      <TableCell>{customer.institute}</TableCell>
+                      <TableCell>{customer.branch}</TableCell>
+                      <TableCell>{customer.mobile_no}</TableCell>
+                      <TableCell>{customer.email}</TableCell>
+                      <TableCell>{customer.district}</TableCell>
+                      <TableCell>{customer.city}</TableCell>
+                      <TableCell>{customer.country}</TableCell>
+                      <TableCell>{customer.hall}</TableCell>
+                      <TableCell>{customer.email}</TableCell>
+                      <TableCell>
+                        <Box
+                          sx={{
+                            width: 24,
+                            height: 24,
+                            padding: "5px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            color: "white",
+                            borderRadius: "50%",
+                            bgcolor: customer.day_1
+                              ? theme.palette.success.main
+                              : theme.palette.error.main,
+                          }}
                         >
-                          {getInitials(customer.company_name)}
-                        </Avatar>
-                        <Typography variant="subtitle2">
-                          {customer.company_name}
-                        </Typography>
-                      </Stack>
-                    </TableCell>
-                    <TableCell>{customer.name}</TableCell>
-                    <TableCell>{customer.gender}</TableCell>
-                    <TableCell>{customer.category}</TableCell>
-                    <TableCell>{customer.institute}</TableCell>
-                    <TableCell>{customer.branch}</TableCell>
-                    <TableCell>{customer.mobile_no}</TableCell>
-                    <TableCell>{customer.email}</TableCell>
-                    <TableCell>{customer.district}</TableCell>
-                    <TableCell>{customer.city}</TableCell>
-                    <TableCell>{customer.country}</TableCell>
-                    <TableCell>{customer.hall}</TableCell>
-                    <TableCell>{customer.email}</TableCell>
-                    <TableCell>
-                      <Box
-                        sx={{
-                          width: 24,
-                          height: 24,
-                          padding: "5px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          color: "white",
-                          borderRadius: "50%",
-                          bgcolor: customer.day_1
-                            ? theme.palette.success.main
-                            : theme.palette.error.main,
-                        }}
-                      >
-                        {customer.day_1 ? <Right /> : <Woring />}
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      <Box
-                        sx={{
-                          width: 24,
-                          height: 24,
-                          padding: "5px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          color: "white",
-                          borderRadius: "50%",
-                          bgcolor: customer.day_2
-                            ? theme.palette.success.main
-                            : theme.palette.error.main,
-                        }}
-                      >
-                        {customer.day_2 ? <Right /> : <Woring />}
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      <Box
-                        sx={{
-                          width: 24,
-                          height: 24,
-                          padding: "5px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          color: "white",
-                          borderRadius: "50%",
-                          bgcolor: customer.day_3
-                            ? theme.palette.success.main
-                            : theme.palette.error.main,
-                        }}
-                      >
-                        {customer.day_3 ? <Right /> : <Woring />}
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      <Box
-                        sx={{
-                          width: 24,
-                          height: 24,
-                          padding: "5px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          color: "white",
-                          borderRadius: "50%",
-                          bgcolor: customer.day_all
-                            ? theme.palette.success.main
-                            : theme.palette.error.main,
-                        }}
-                      >
-                        {customer.day_all ? <Right /> : <Woring />}
-                      </Box>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </Box>
-      </Scrollbar>
-      <TablePagination
-        component="div"
-        count={count}
-        onPageChange={onPageChange}
-        onRowsPerPageChange={onRowsPerPageChange}
-        page={page}
-        rowsPerPage={rowsPerPage}
-        rowsPerPageOptions={[5, 10, 25]}
+                          {customer.day_1 ? <Right /> : <Woring />}
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <Box
+                          sx={{
+                            width: 24,
+                            height: 24,
+                            padding: "5px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            color: "white",
+                            borderRadius: "50%",
+                            bgcolor: customer.day_2
+                              ? theme.palette.success.main
+                              : theme.palette.error.main,
+                          }}
+                        >
+                          {customer.day_2 ? <Right /> : <Woring />}
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <Box
+                          sx={{
+                            width: 24,
+                            height: 24,
+                            padding: "5px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            color: "white",
+                            borderRadius: "50%",
+                            bgcolor: customer.day_3
+                              ? theme.palette.success.main
+                              : theme.palette.error.main,
+                          }}
+                        >
+                          {customer.day_3 ? <Right /> : <Woring />}
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <Box
+                          sx={{
+                            width: 24,
+                            height: 24,
+                            padding: "5px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            color: "white",
+                            borderRadius: "50%",
+                            bgcolor:
+                              (customer.day_1 &&
+                                customer.day_2 &&
+                                customer.day_3) == true
+                                ? theme.palette.success.main
+                                : theme.palette.error.main,
+                          }}
+                        >
+                          {(customer.day_1 &&
+                            customer.day_2 &&
+                            customer.day_3) == true ? (
+                            <Right />
+                          ) : (
+                            <Woring />
+                          )}
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          onClick={() => {
+                            setOpen(true);
+                            setDProps({
+                              data: {
+                                title: "Alert",
+                                message: `Are you sure you want to delete the details of this delegate?`,
+                              },
+                              action_button: [
+                                {
+                                  name: "Yes",
+                                  fun: () => {
+                                    deleteDelegate(
+                                      localStorage.getItem("token") || "",
+                                      customer.id
+                                    )
+                                      .then(
+                                        (data) => {
+                                          setMessage(data.data.message);
+                                          setOpenS(true);
+                                        },
+                                        (error) => {
+                                          setMessage(error.data.message);
+                                          setOpenS(true);
+                                        }
+                                      )
+                                      .finally(() => {
+                                        refresh();
+                                        setOpen(false);
+                                      });
+                                  },
+                                },
+                                {
+                                  name: "No",
+                                  fun: () => setOpen((s) => !s),
+                                },
+                              ],
+                            });
+                          }}
+                          color="error"
+                        >
+                          Delete
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </Box>
+        </Scrollbar>
+        <TablePagination
+          component="div"
+          count={count}
+          onPageChange={onPageChange}
+          onRowsPerPageChange={onRowsPerPageChange}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          rowsPerPageOptions={[5, 10, 25]}
+        />
+      </Card>
+      <PopUp open={open} {...Dprops} />
+      <Snackbar
+        open={openS}
+        message={message}
+        onClose={() => setOpenS((s) => !s)}
       />
-    </Card>
+    </>
   );
 };
-
+const PopUp = (props: {
+  data?: {
+    title: string;
+    message: string;
+  };
+  action_button?: Array<{ fun: () => any; name: string }>;
+  open: boolean;
+}) => {
+  return (
+    <Dialog open={props.open}>
+      <DialogTitle>{props.data?.title}</DialogTitle>
+      <DialogContent>{props.data?.message}</DialogContent>
+      <DialogActions>
+        {props?.action_button?.map((v, i) => (
+          <Button onClick={v.fun} key={i}>
+            {v.name}
+          </Button>
+        ))}
+      </DialogActions>
+    </Dialog>
+  );
+};
 const Page = () => {
   const theme = useTheme();
   const [page, setPage] = React.useState(0);
@@ -281,8 +384,8 @@ const Page = () => {
             <Stack direction="row" justifyContent="space-between" spacing={4}>
               <Stack spacing={1}>
                 <Typography variant="h4">Delegates</Typography>
-                <Stack alignItems="center" direction="row" spacing={1}>
-                  <Button
+                {/* <Stack alignItems="center" direction="row" spacing={1}>
+                   <Button
                     color="inherit"
                     onClick={async () => {
                       const a = document.createElement("a");
@@ -303,8 +406,8 @@ const Page = () => {
                     }
                   >
                     Export
-                  </Button>
-                </Stack>
+                  </Button> 
+                </Stack> */}
               </Stack>
               <div>
                 <Button
@@ -314,7 +417,7 @@ const Page = () => {
                     </SvgIcon>
                   }
                   onClick={() => {
-                    router.push("/oem");
+                    router.push("/admin");
                   }}
                   variant="contained"
                 >
@@ -329,6 +432,19 @@ const Page = () => {
             onPageChange={handlePageChange}
             onRowsPerPageChange={handleRowsPerPageChange}
             page={page}
+            refresh={() => {
+              getAllDelegates(localStorage.getItem("token") || "").then(
+                async (data) => {
+                  let _data = await data.json();
+                  console.log(_data.data);
+
+                  setExhibitor(_data.data.rows);
+                },
+                (e) => {
+                  console.log(e);
+                }
+              );
+            }}
             rowsPerPage={rowsPerPage}
           />
         </Container>

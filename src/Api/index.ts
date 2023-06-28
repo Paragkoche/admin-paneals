@@ -260,3 +260,13 @@ export const createVisitor = async (token: string, data: any) => {
     },
   });
 }
+export const deleteDelegate = async (token: string, id: string) => {
+  return axios(URL + "/api/delegate/delete/" + id, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization",
+    },
+  });
+}

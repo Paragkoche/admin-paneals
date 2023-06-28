@@ -133,6 +133,19 @@ const Page = () => {
             onRowsPerPageChange={handleRowsPerPageChange}
             page={page}
             rowsPerPage={rowsPerPage}
+            refresh={() => {
+              getAllVisitor(localStorage.getItem("token") || "").then(
+                async (data) => {
+                  let _data = await data.json();
+                  console.log(_data.data);
+
+                  setExhibitor(_data.data.rows);
+                },
+                (e) => {
+                  console.log(e);
+                }
+              );
+            }}
           />
         </Container>
       </Box>
