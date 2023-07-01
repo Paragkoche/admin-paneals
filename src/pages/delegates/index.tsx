@@ -108,7 +108,7 @@ const Tables = (props: any) => {
                     "branch",
                     "mobile_no",
                     "email",
-                    "district",
+                    // "district",
                     "city",
                     "state",
                     "country",
@@ -147,7 +147,7 @@ const Tables = (props: any) => {
                       <TableCell>{customer.branch}</TableCell>
                       <TableCell>{customer.mobile_no}</TableCell>
                       <TableCell>{customer.email}</TableCell>
-                      <TableCell>{customer.district}</TableCell>
+                      {/* <TableCell>{customer.district}</TableCell> */}
                       <TableCell>{customer.city}</TableCell>
                       <TableCell>{customer.country}</TableCell>
                       <TableCell>{customer.hall}</TableCell>
