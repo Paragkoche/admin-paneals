@@ -149,6 +149,7 @@ const Tables = (props: any) => {
                       <TableCell>{customer.email}</TableCell>
                       {/* <TableCell>{customer.district}</TableCell> */}
                       <TableCell>{customer.city}</TableCell>
+                      <TableCell>{customer.state}</TableCell>
                       <TableCell>{customer.country}</TableCell>
                       <TableCell>{customer.hall}</TableCell>
                       <TableCell>{customer.email}</TableCell>
