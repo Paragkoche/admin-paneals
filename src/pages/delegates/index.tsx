@@ -113,6 +113,7 @@ const Tables = (props: any) => {
                     "state",
                     "country",
                     "hall",
+                    "Email",
                     "day_1",
                     "day_2",
                     "day_3",
