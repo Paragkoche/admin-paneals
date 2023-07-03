@@ -282,10 +282,12 @@ const Tables = (props: any) => {
                   return (
                     <TableRow hover key={customer.id}>
                       <TableCell>{customer.company_name}</TableCell>
-                      <TableCell>{exhibitor_mannings.name}</TableCell>
-                      <TableCell>{exhibitor_mannings.designation}</TableCell>
-                      <TableCell>{exhibitor_mannings.email}</TableCell>
-                      <TableCell>{exhibitor_mannings.mobile}</TableCell>
+                      <TableCell>{exhibitor_mannings.name || ""}</TableCell>
+                      <TableCell>
+                        {exhibitor_mannings.designation || ""}
+                      </TableCell>
+                      <TableCell>{exhibitor_mannings.email || ""}</TableCell>
+                      <TableCell>{exhibitor_mannings.mobile || ""}</TableCell>
                     </TableRow>
                   );
                 })}
