@@ -278,7 +278,12 @@ const Tables = (props: any) => {
               </TableHead>
               <TableBody>
                 {items.map((customer: any) => {
-                  let exhibitor_mannings = customer.exhibitor_mannings[0];
+                  let exhibitor_mannings = customer.exhibitor_mannings[0] || {
+                    name: "",
+                    designation: "",
+                    email: "",
+                    mobile: "",
+                  };
                   return (
                     <TableRow hover key={customer.id}>
                       <TableCell>{customer.company_name}</TableCell>
