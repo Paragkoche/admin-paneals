@@ -228,7 +228,7 @@ const Page = () => {
             </FormControl>
             <TextField
               type="number"
-              label="Number of Bags"
+              label="Number of Badges"
               onChange={(e) =>
                 setFrom((s) => ({
                   ...s,
@@ -239,7 +239,7 @@ const Page = () => {
             ></TextField>
             <TextField
               type="number"
-              label="Number of Extra Bags"
+              label="Number of Extra Badges"
               onChange={(e) =>
                 setFrom((s) => ({
                   ...s,
