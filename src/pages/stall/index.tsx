@@ -122,7 +122,7 @@ const Page = () => {
         <Box>
           <Box sx={{ display: "flex", flexWrap: "wrap" }}>
             <FormControl sx={{ m: 3, width: 200 }}>
-              <InputLabel id="Hall-label">Exhibitor</InputLabel>
+              <InputLabel id="Hall-label">Company Name</InputLabel>
 
               <Select
                 onChange={(e: any) =>
@@ -130,7 +130,7 @@ const Page = () => {
                 }
               >
                 {ex.map((v: any) => (
-                  <MenuItem value={v.id}>{v.company_repName}</MenuItem>
+                  <MenuItem value={v.id}>{v.company_name}</MenuItem>
                 ))}
               </Select>
             </FormControl>
