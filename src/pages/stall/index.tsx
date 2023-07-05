@@ -364,6 +364,9 @@ const Page = () => {
             ></TextField>
             <TextField
               type="number"
+              onChange={(e) =>
+                setFrom((s) => ({ ...s, open_sides: parseInt(e.target.value) }))
+              }
               label="Open Sides"
               value={from.open_sides}
               sx={{ m: 3 }}
