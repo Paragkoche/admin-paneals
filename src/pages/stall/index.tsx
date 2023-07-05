@@ -175,6 +175,7 @@ const Page = () => {
                     let sl = 0;
                     let ps = 0;
                     let d = 0;
+                    let os = 0;
 
                     for (let i of e) {
                       w += i.width;
@@ -186,6 +187,8 @@ const Page = () => {
                       sl += i.s;
                       ps += i.ps;
                       d += i.d;
+                      console.log(i);
+                      os +=i.os;
                       if (t == "") t += i.type;
                       if (t[0] == "b" && i.type[0] !== "b") t += "-" + i.type;
                       if (t[0] == "s" && i.type[0] !== "s") t += "-" + i.type;
@@ -202,6 +205,7 @@ const Page = () => {
                       power_socket: ps,
                       spotlight: sl,
                       dustbin: d,
+                      open_sides: os,
                     }));
                     console.log(t);
                   }}
@@ -361,6 +365,7 @@ const Page = () => {
             <TextField
               type="number"
               label="Open Sides"
+              value={from.open_sides}
               sx={{ m: 3 }}
             ></TextField>
           </Box>

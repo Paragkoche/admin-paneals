@@ -254,7 +254,7 @@ const Page = () => {
             </FormControl>
             <TextField
               type="number"
-              label="Number of Bags"
+              label="Number of badges"
               value={from.number_of_bagdes}
               onChange={(e) =>
                 setFrom((s) => ({
